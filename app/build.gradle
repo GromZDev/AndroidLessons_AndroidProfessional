@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt' // need for Dagger
 }
 
 android {
@@ -63,5 +64,11 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    // for Dagger
+    implementation 'com.google.dagger:dagger-android:2.37'
+    implementation 'com.google.dagger:dagger-android-support:2.37'
+    kapt 'com.google.dagger:dagger-android-processor:2.35.1'
+    kapt 'com.google.dagger:dagger-compiler:2.37'
 
 }

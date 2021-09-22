@@ -4,18 +4,17 @@ import androidx.lifecycle.LiveData
 import io.reactivex.observers.DisposableObserver
 import q4_android_professional.myapplication.interactor.MainInterActor
 import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.model.datasource.DataSourceLocal
-import q4_android_professional.myapplication.model.datasource.DataSourceRemote
-import q4_android_professional.myapplication.repository.RepositoryImplementation
+import javax.inject.Inject
 
-class MainViewModel(
-    private val interActor: MainInterActor = MainInterActor(
-        RepositoryImplementation(DataSourceRemote()),
-        RepositoryImplementation(DataSourceLocal())
-    )
+class MainViewModel @Inject constructor(
+    private val interActor: MainInterActor
 ) : BaseViewModel<AppState>() {
 
     private var appState: AppState? = null
+
+//    fun subscribe(): LiveData<AppState> {
+//        return livedataToObserve
+//    }
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
         compositeDisposable.add(
@@ -35,7 +34,7 @@ class MainViewModel(
         return object : DisposableObserver<AppState>() {
             override fun onNext(state: AppState) {
                 appState = state
-                livedataToObserve.postValue(state)
+                livedataToObserve.postValue(appState)
             }
 
             override fun onError(e: Throwable) {

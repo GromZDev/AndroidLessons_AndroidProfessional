@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.android.support.AndroidSupportInjection
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentMainBinding
 import q4_android_professional.myapplication.model.AppState
@@ -16,12 +17,14 @@ import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.view.base.BaseFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
+import javax.inject.Inject
 
 class MainFragment : BaseFragment<AppState>() {
 
-    override val model: MainViewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
-    }
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    override lateinit var model: MainViewModel
 
     private val observer = Observer<AppState> {
         renderData(it)
@@ -56,7 +59,14 @@ class MainFragment : BaseFragment<AppState>() {
     }.root
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
         super.onViewCreated(view, savedInstanceState)
+
+        model = viewModelFactory.create(MainViewModel::class.java)
+
+//        model.subscribe().observe(viewLifecycleOwner, Observer<AppState> {
+//            renderData(it)
+//        })
 
         model.getData("Dictionary", true).observe(viewLifecycleOwner, observer)
 
