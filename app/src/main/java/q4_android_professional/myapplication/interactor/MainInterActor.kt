@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.presenter
+package q4_android_professional.myapplication.interactor
 
 import io.reactivex.Observable
 import q4_android_professional.myapplication.model.AppState

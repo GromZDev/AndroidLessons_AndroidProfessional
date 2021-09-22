@@ -6,18 +6,27 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import q4_android_professional.myapplication.*
+import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentMainBinding
 import q4_android_professional.myapplication.model.AppState
 import q4_android_professional.myapplication.model.DataModel
-import q4_android_professional.myapplication.presenter.MainPresenterImpl
-import q4_android_professional.myapplication.presenter.Presenter
 import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.view.base.BaseFragment
-import q4_android_professional.myapplication.view.base.View
+import q4_android_professional.myapplication.viewmodel.MainViewModel
 
 class MainFragment : BaseFragment<AppState>() {
+
+    override val model: MainViewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
+    }
+
+    private val observer = Observer<AppState> {
+        renderData(it)
+    }
+
 
     companion object {
         fun newInstance() = MainFragment()
@@ -46,13 +55,32 @@ class MainFragment : BaseFragment<AppState>() {
         _binding = it
     }.root
 
+    override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        model.getData("Dictionary", true).observe(viewLifecycleOwner, observer)
+
+        binding.searchFab.setOnClickListener {
+            val searchDialogFragment = SearchDialogFragment.newInstance()
+            searchDialogFragment.setOnSearchClickListener(object :
+
+                SearchDialogFragment.OnSearchClickListener {
+                override fun onClick(searchWord: String) {
+                    model.getData(searchWord, true).observe(viewLifecycleOwner, observer)
+                }
+            })
+            childFragmentManager.let { it1 ->
+                searchDialogFragment.show(
+                    it1,
+                    BOTTOM_SHEET_FRAGMENT_DIALOG_TAG
+                )
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun createPresenter(): Presenter<AppState, View> {
-        return MainPresenterImpl()
     }
 
     override fun renderData(appState: AppState) {
@@ -95,7 +123,8 @@ class MainFragment : BaseFragment<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            presenter.getData("hi", true)
+            model.getData("Welcome!", true).observe(viewLifecycleOwner, observer)
+
         }
     }
 
@@ -115,27 +144,6 @@ class MainFragment : BaseFragment<AppState>() {
         binding.successLinearLayout.visibility = GONE
         binding.loadingFrameLayout.visibility = GONE
         binding.errorLinearLayout.visibility = VISIBLE
-    }
-
-    override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.searchFab.setOnClickListener {
-            val searchDialogFragment = SearchDialogFragment.newInstance()
-            searchDialogFragment.setOnSearchClickListener(object :
-
-                SearchDialogFragment.OnSearchClickListener {
-                override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord, true)
-                }
-            })
-            fragmentManager?.let { it1 ->
-                searchDialogFragment.show(
-                    it1,
-                    BOTTOM_SHEET_FRAGMENT_DIALOG_TAG
-                )
-            }
-        }
     }
 
 }
