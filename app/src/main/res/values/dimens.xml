@@ -23,4 +23,14 @@
 
     //Corner radius
     <dimen name="bottom_sheet_dialog_corner_radius">10dp</dimen>
+
+    //Image size
+    <dimen name="image_width">160dp</dimen>
+    <dimen name="image_height">120dp</dimen>
+    <dimen name="image_margin_start">4dp</dimen>
+    <dimen name="image_stroke">6dp</dimen>
+
+    <dimen name="item_layout_padding">12dp</dimen>
+    <dimen name="tw_item_layout_width">0dp</dimen>
+
 </resources>
