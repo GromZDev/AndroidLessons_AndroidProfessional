@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import io.reactivex.observers.DisposableObserver
 import q4_android_professional.myapplication.interactor.MainInterActor
 import q4_android_professional.myapplication.model.AppState
+import q4_android_professional.myapplication.utils.networkstatus.parseSearchResults
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -33,7 +34,7 @@ class MainViewModel @Inject constructor(
     private fun getObserver(): DisposableObserver<AppState> {
         return object : DisposableObserver<AppState>() {
             override fun onNext(state: AppState) {
-                appState = state
+                appState = parseSearchResults(state)
                 livedataToObserve.postValue(appState)
             }
 

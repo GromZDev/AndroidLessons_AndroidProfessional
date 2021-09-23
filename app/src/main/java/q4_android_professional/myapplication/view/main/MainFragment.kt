@@ -15,6 +15,7 @@ import q4_android_professional.myapplication.databinding.FragmentMainBinding
 import q4_android_professional.myapplication.model.AppState
 import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.GlideImageLoader
+import q4_android_professional.myapplication.utils.networkstatus.isOnline
 import q4_android_professional.myapplication.view.base.BaseFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
 import javax.inject.Inject
@@ -76,7 +77,14 @@ class MainFragment : BaseFragment<AppState>() {
 
                 SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    model.getData(searchWord, true).observe(viewLifecycleOwner, observer)
+                    // Сеть =================================================
+                    isNetworkAvailable = context?.let { it1 -> isOnline(it1) } == true
+                    if (isNetworkAvailable){
+                        model.getData(searchWord, true).observe(viewLifecycleOwner, observer)
+                    } else {
+                        showNoInternetConnectionDialog()
+                    }
+                   // ========================================================
                 }
             })
             childFragmentManager.let { it1 ->

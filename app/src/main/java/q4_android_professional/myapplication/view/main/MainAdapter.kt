@@ -7,6 +7,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import q4_android_professional.myapplication.databinding.ItemMainFragmentRvBinding
 import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.ImageLoader
+import q4_android_professional.myapplication.utils.networkstatus.convertMeaningsToString
 
 class MainAdapter(
     private var onListItemClickListener: OnListItemClickListener,
@@ -53,7 +54,11 @@ class MainAdapter(
                     "https:" + data.meanings?.get(0)?.imageUrl.toString(), itemWordImage
                 )
 
-                transcriptionTextviewRecyclerItem.text = data.meanings?.get(0)?.transcription
+                transcriptionTextviewRecyclerItem.text = data.meanings?.let {
+                    convertMeaningsToString(
+                        it
+                    )
+                }
 
                 itemView.setOnClickListener { openInNewWindow(data) }
             }
