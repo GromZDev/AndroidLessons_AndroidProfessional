@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import q4_android_professional.myapplication.databinding.SearchDialogFragmentBinding
+import q4_android_professional.myapplication.utils.networkstatus.getEmptyString
 
 class SearchDialogFragment : BottomSheetDialogFragment() {
 
@@ -16,8 +17,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
     private val textWatcher = object : TextWatcher {
 
         override fun onTextChanged(
-            s: CharSequence, start: Int, before: Int, count:
-            Int
+            s: CharSequence, start: Int, before: Int, count: Int
         ) {
             if (binding.searchEditText.text != null &&
                 binding.searchEditText.text.toString().isNotEmpty()
@@ -31,8 +31,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
         }
 
         override fun beforeTextChanged(
-            s: CharSequence, start: Int, count: Int, after:
-            Int
+            s: CharSequence, start: Int, count: Int, after: Int
         ) {
         }
 
@@ -72,7 +71,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
 
     private fun addOnClearClickListener() {
         binding.clearTextImageview.setOnClickListener {
-            binding.searchEditText.setText("")
+            binding.searchEditText.setText(String.getEmptyString()) // Берем из экстеншена
             binding.searchButtonTextview.isEnabled = false
         }
     }
