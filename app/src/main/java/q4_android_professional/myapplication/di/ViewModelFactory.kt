@@ -13,7 +13,6 @@ import javax.inject.Singleton
 class ViewModelFactory @Inject constructor(
     private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
-    //TODO ???
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val creator = viewModels[modelClass] ?: viewModels.asIterable().firstOrNull {
             modelClass.isAssignableFrom(it.key)

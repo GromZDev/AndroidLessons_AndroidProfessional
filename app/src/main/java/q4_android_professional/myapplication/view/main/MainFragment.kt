@@ -14,7 +14,6 @@ import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentMainBinding
 import q4_android_professional.myapplication.model.AppState
 import q4_android_professional.myapplication.model.DataModel
-import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.utils.networkstatus.isOnline
 import q4_android_professional.myapplication.view.base.BaseFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
@@ -24,6 +23,9 @@ class MainFragment : BaseFragment<AppState>() {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var diMainFragmentFactory: DiMainFragmentFactory
 
     override lateinit var model: MainViewModel
 
@@ -79,12 +81,12 @@ class MainFragment : BaseFragment<AppState>() {
                 override fun onClick(searchWord: String) {
                     // Сеть =================================================
                     isNetworkAvailable = context?.let { it1 -> isOnline(it1) } == true
-                    if (isNetworkAvailable){
+                    if (isNetworkAvailable) {
                         model.getData(searchWord, true).observe(viewLifecycleOwner, observer)
                     } else {
                         showNoInternetConnectionDialog()
                     }
-                   // ========================================================
+                    // ========================================================
                 }
             })
             childFragmentManager.let { it1 ->
@@ -112,8 +114,11 @@ class MainFragment : BaseFragment<AppState>() {
                     if (adapter == null) {
                         binding.mainActivityRecyclerview.layoutManager =
                             LinearLayoutManager(context)
+
+                        /** Сетим зависимости в Main Adapter через @AssistedInject*/
                         binding.mainActivityRecyclerview.adapter =
-                            MainAdapter(onListItemClickListener, dataModel, GlideImageLoader())
+                            diMainFragmentFactory.create(dataModel, onListItemClickListener)
+                        /** ----------------------------------------------------- */
                     } else {
 
                         binding.mainActivityRecyclerview.let { adapter!!.setData(dataModel) }

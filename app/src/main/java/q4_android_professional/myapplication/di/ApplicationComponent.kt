@@ -13,7 +13,8 @@ import javax.inject.Singleton
         InterActorModule::class,
         ViewModelModule::class,
         MainFragmentModule::class,
-        RepositoryModule::class]
+        RepositoryModule::class,
+        ImageLoaderModule::class]
 )
 
 @Singleton
