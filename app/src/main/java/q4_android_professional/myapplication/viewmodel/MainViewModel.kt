@@ -7,15 +7,18 @@ import q4_android_professional.myapplication.model.AppState
 import q4_android_professional.myapplication.utils.networkstatus.parseSearchResults
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class MainViewModel
+// Закомментированный Dagger!!!
+//@Inject constructor
+    (
     private val interActor: MainInterActor
 ) : BaseViewModel<AppState>() {
 
     private var appState: AppState? = null
 
-//    fun subscribe(): LiveData<AppState> {
-//        return livedataToObserve
-//    }
+    fun subscribe(): LiveData<AppState> {
+        return livedataToObserve
+    }
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
         compositeDisposable.add(

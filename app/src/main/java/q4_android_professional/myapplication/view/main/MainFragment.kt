@@ -9,11 +9,12 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.android.support.AndroidSupportInjection
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentMainBinding
 import q4_android_professional.myapplication.model.AppState
 import q4_android_professional.myapplication.model.DataModel
+import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.utils.networkstatus.isOnline
 import q4_android_professional.myapplication.view.base.BaseFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
@@ -24,8 +25,8 @@ class MainFragment : BaseFragment<AppState>() {
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    lateinit var diMainFragmentFactory: DiMainFragmentFactory
+//    @Inject
+//    lateinit var diMainFragmentFactory: DiMainFragmentFactory
 
     override lateinit var model: MainViewModel
 
@@ -59,13 +60,14 @@ class MainFragment : BaseFragment<AppState>() {
         savedInstanceState: Bundle?
     ) = FragmentMainBinding.inflate(inflater, container, false).also {
         _binding = it
+        iniViewModel()
+        initViews()
     }.root
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
-        AndroidSupportInjection.inject(this)
+        //    AndroidSupportInjection.inject(this)
         super.onViewCreated(view, savedInstanceState)
-
-        model = viewModelFactory.create(MainViewModel::class.java)
+        //    model = viewModelFactory.create(MainViewModel::class.java)
 
 //        model.subscribe().observe(viewLifecycleOwner, Observer<AppState> {
 //            renderData(it)
@@ -112,13 +114,15 @@ class MainFragment : BaseFragment<AppState>() {
                 } else {
                     showViewSuccess()
                     if (adapter == null) {
-                        binding.mainActivityRecyclerview.layoutManager =
-                            LinearLayoutManager(context)
+//                        binding.mainActivityRecyclerview.layoutManager =
+//                            LinearLayoutManager(context)
 
-                        /** Сетим зависимости в Main Adapter через @AssistedInject*/
                         binding.mainActivityRecyclerview.adapter =
-                            diMainFragmentFactory.create(dataModel, onListItemClickListener)
-                        /** ----------------------------------------------------- */
+                            MainAdapter(onListItemClickListener, dataModel, GlideImageLoader())
+//                        /** Сетим зависимости в Main Adapter через @AssistedInject*/
+//                        binding.mainActivityRecyclerview.adapter =
+//                            diMainFragmentFactory.create(dataModel, onListItemClickListener)
+//                        /** ----------------------------------------------------- */
                     } else {
 
                         binding.mainActivityRecyclerview.let { adapter!!.setData(dataModel) }
@@ -168,5 +172,23 @@ class MainFragment : BaseFragment<AppState>() {
         binding.loadingFrameLayout.visibility = GONE
         binding.errorLinearLayout.visibility = VISIBLE
     }
+
+    /** Реализация Koin ========================== */
+    private fun initViews() {
+        binding.mainActivityRecyclerview.layoutManager =
+            LinearLayoutManager(context)
+        binding.mainActivityRecyclerview.adapter = adapter
+    }
+
+    private fun iniViewModel() {
+        if (binding.mainActivityRecyclerview.adapter != null) {
+            throw IllegalStateException("The ViewModel should be initialised first")
+        }
+        val viewModel: MainViewModel by viewModel()
+        model = viewModel
+        model.subscribe().observe(viewLifecycleOwner, observer)
+    }
+    /** ============================================= */
+
 
 }
