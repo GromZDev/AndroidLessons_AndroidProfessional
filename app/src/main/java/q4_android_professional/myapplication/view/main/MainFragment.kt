@@ -73,7 +73,8 @@ class MainFragment : BaseFragment<AppState>() {
 //            renderData(it)
 //        })
 
-        model.getData("Dictionary", true).observe(viewLifecycleOwner, observer)
+        model.getData("Dictionary", true)
+        // RX.observe(viewLifecycleOwner, observer)
 
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
@@ -84,7 +85,8 @@ class MainFragment : BaseFragment<AppState>() {
                     // Сеть =================================================
                     isNetworkAvailable = context?.let { it1 -> isOnline(it1) } == true
                     if (isNetworkAvailable) {
-                        model.getData(searchWord, true).observe(viewLifecycleOwner, observer)
+                        model.getData(searchWord, true)
+                        // RX.observe(viewLifecycleOwner, observer)
                     } else {
                         showNoInternetConnectionDialog()
                     }
@@ -124,7 +126,6 @@ class MainFragment : BaseFragment<AppState>() {
 //                            diMainFragmentFactory.create(dataModel, onListItemClickListener)
 //                        /** ----------------------------------------------------- */
                     } else {
-
                         binding.mainActivityRecyclerview.let { adapter!!.setData(dataModel) }
                     }
                 }
@@ -150,7 +151,8 @@ class MainFragment : BaseFragment<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            model.getData("Welcome!", true).observe(viewLifecycleOwner, observer)
+            model.getData("Welcome!", true)
+            // RX .observe(viewLifecycleOwner, observer)
 
         }
     }
