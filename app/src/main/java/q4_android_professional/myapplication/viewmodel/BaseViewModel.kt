@@ -1,26 +1,43 @@
 package q4_android_professional.myapplication.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.*
 import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.reactive.SchedulerProvider
 
 abstract class BaseViewModel<T : AppState>(
-    protected val livedataToObserve: MutableLiveData<T> =
+    protected open val _mutableLiveData: MutableLiveData<T> =
         MutableLiveData(),
-    protected val compositeDisposable: CompositeDisposable =
-        CompositeDisposable(),
-    protected val schedulerProvider: SchedulerProvider =
-        SchedulerProvider()
+// RX   protected val compositeDisposable: CompositeDisposable =
+//        CompositeDisposable(),
+//    protected val schedulerProvider: SchedulerProvider =
+//        SchedulerProvider()
 ) : ViewModel() {
 
-    open fun getData(word: String, isOnline: Boolean): LiveData<T> =
-        livedataToObserve
+    /** Coroutines - создаём корутину в потоке */
+    protected val viewModelCoroutineScope = CoroutineScope(
+        Dispatchers.Main
+                + SupervisorJob()
+                + CoroutineExceptionHandler { _, throwable ->
+            handleError(throwable)
+        })
+
+// RX   open fun getData(word: String, isOnline: Boolean): LiveData<T> =
+//        livedataToObserve
+
+    abstract fun getData(word: String, isOnline: Boolean)
 
     override fun onCleared() {
-        compositeDisposable.clear()
+        // RX  compositeDisposable.clear()
+        /** Coroutines - отменяем работу корутины */
+        super.onCleared()
+        cancelJob()
     }
+
+    protected fun cancelJob() {
+        viewModelCoroutineScope.coroutineContext.cancelChildren()
+    }
+
+    abstract fun handleError(error: Throwable)
 
 }
