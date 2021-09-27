@@ -28,6 +28,7 @@ private fun parseResult(dataModel: DataModel, newDataModels: ArrayList<DataModel
                 newMeanings.add(
                     Meanings(
                         meaning.translation,
+                        meaning.previewUrl,
                         meaning.imageUrl,
                         meaning.transcription
                     )
@@ -47,6 +48,22 @@ fun convertMeaningsToString(meanings: List<Meanings>): String {
             String.format("%s%s", meaning.translation?.translation, ", ")
         } else {
             meaning.translation?.translation
+        }
+    }
+    return meaningsSeparatedByComma
+}
+
+fun convertNoteToString(meanings: List<Meanings>): String {
+    var meaningsSeparatedByComma = String()
+    for ((index, meaning) in meanings.withIndex()) {
+        meaningsSeparatedByComma += if (index + 1 != meanings.size) {
+            if (meaning.translation?.note.isNullOrEmpty()) {
+                String.format("")
+            } else {
+                String.format("%s%s", meaning.translation?.note, ", ")
+            }
+        } else {
+            meaning.translation?.note
         }
     }
     return meaningsSeparatedByComma

@@ -17,6 +17,7 @@ import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.utils.networkstatus.isOnline
 import q4_android_professional.myapplication.view.base.BaseFragment
+import q4_android_professional.myapplication.view.description.DescriptionFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
 import javax.inject.Inject
 
@@ -47,10 +48,15 @@ class MainFragment : BaseFragment<AppState>() {
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                Toast.makeText(
-                    context, data.text,
-                    Toast.LENGTH_SHORT
-                ).show()
+
+
+                val manager = activity?.supportFragmentManager
+            manager?.let {
+                manager.beginTransaction()
+                    .replace(R.id.fragment_container, DescriptionFragment.newInstance(data))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
             }
         }
 
@@ -65,16 +71,11 @@ class MainFragment : BaseFragment<AppState>() {
     }.root
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
-        //    AndroidSupportInjection.inject(this)
         super.onViewCreated(view, savedInstanceState)
-        //    model = viewModelFactory.create(MainViewModel::class.java)
 
-//        model.subscribe().observe(viewLifecycleOwner, Observer<AppState> {
-//            renderData(it)
-//        })
 
-        model.getData("Dictionary", true)
-        // RX.observe(viewLifecycleOwner, observer)
+     //   model.getData("Dictionary", true)
+
 
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
