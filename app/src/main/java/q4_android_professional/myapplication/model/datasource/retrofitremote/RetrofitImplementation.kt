@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.model.datasource
+package q4_android_professional.myapplication.model.datasource.retrofitremote
 
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -11,8 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImplementation : DataSource<List<DataModel>> {
-// RX: override fun getData(word: String): Observable<List<DataModel>> {
-//        return getService(BaseInterceptor.interceptor).searchAsync(word)
     /** Coroutines -  */
     override suspend fun getData(word: String): List<DataModel> {
         return getService(BaseInterceptor.interceptor).searchAsync(word).await()
@@ -26,7 +24,6 @@ class RetrofitImplementation : DataSource<List<DataModel>> {
         return Retrofit.Builder()
             .baseUrl(BASE_URL_LOCATIONS)
             .addConverterFactory(GsonConverterFactory.create())
-            // RX:   .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             /** Coroutines -  */
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(createOkHttpClient(interceptor))

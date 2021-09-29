@@ -10,11 +10,11 @@ import q4_android_professional.myapplication.viewmodel.MainViewModel
 @Module(includes = [InterActorModule::class])
 abstract class ViewModelModule {
 
-    @Binds
-    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
-    @Binds
-    @IntoMap
-    @ViewModelKeys(MainViewModel::class)
-    abstract fun mainViewModel(mainViewModel: MainViewModel): ViewModel
+//    @Binds
+//    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelKeys(MainViewModel::class)
+//    abstract fun mainViewModel(mainViewModel: MainViewModel): ViewModel
 }

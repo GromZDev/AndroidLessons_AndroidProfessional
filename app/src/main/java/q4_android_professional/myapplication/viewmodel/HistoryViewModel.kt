@@ -1,15 +1,13 @@
 package q4_android_professional.myapplication.viewmodel
 
 import androidx.lifecycle.LiveData
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import q4_android_professional.myapplication.interactor.MainInterActor
 import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.utils.networkstatus.parseOnlineSearchResults
+import q4_android_professional.myapplication.utils.networkstatus.parseLocalSearchResults
+import q4_android_professional.myapplication.interactor.HistoryInterActor
 
-class MainViewModel(
-    private val interActor: MainInterActor
+class HistoryViewModel(
+    private val interActor: HistoryInterActor
 ) : BaseViewModel<AppState>() {
 
     private val livedataToObserve: LiveData<AppState> = _mutableLiveData
@@ -26,17 +24,10 @@ class MainViewModel(
         viewModelCoroutineScope.launch { startInterActor(word, isOnline) }
     }
 
-    private suspend fun startInterActor(word: String, isOnline: Boolean) =
-        withContext(Dispatchers.IO) {
-            _mutableLiveData.postValue(
-                parseOnlineSearchResults(
-                    interActor.getData(
-                        word,
-                        isOnline
-                    )
-                )
-            )
-        }
+    private suspend fun startInterActor(word: String, isOnline: Boolean) {
+        _mutableLiveData.postValue(parseLocalSearchResults(interActor.getData(word, isOnline)))
+    }
+
 
     override fun handleError(error: Throwable) {
         _mutableLiveData.postValue(AppState.Error(error))

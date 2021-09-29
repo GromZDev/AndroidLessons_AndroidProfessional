@@ -6,12 +6,7 @@ import kotlinx.coroutines.*
 import q4_android_professional.myapplication.model.AppState
 
 abstract class BaseViewModel<T : AppState>(
-    protected open val _mutableLiveData: MutableLiveData<T> =
-        MutableLiveData(),
-// RX   protected val compositeDisposable: CompositeDisposable =
-//        CompositeDisposable(),
-//    protected val schedulerProvider: SchedulerProvider =
-//        SchedulerProvider()
+    protected open val _mutableLiveData: MutableLiveData<T> = MutableLiveData()
 ) : ViewModel() {
 
     /** Coroutines - создаём корутину в потоке */
@@ -22,13 +17,9 @@ abstract class BaseViewModel<T : AppState>(
             handleError(throwable)
         })
 
-// RX   open fun getData(word: String, isOnline: Boolean): LiveData<T> =
-//        livedataToObserve
-
     abstract fun getData(word: String, isOnline: Boolean)
 
     override fun onCleared() {
-        // RX  compositeDisposable.clear()
         /** Coroutines - отменяем работу корутины */
         super.onCleared()
         cancelJob()
