@@ -53,7 +53,7 @@ class MainAdapter @AssistedInject constructor(
                     data.meanings?.get(0)?.translation?.translation
 
                 imageLoader.loadInto(
-                    "https:" + data.meanings?.get(0)?.imageUrl.toString(), itemWordImage
+                    "https:" + data.meanings?.get(0)?.previewUrl.toString(), itemWordImage
                 )
 
                 transcriptionTextviewRecyclerItem.text = data.meanings?.let {

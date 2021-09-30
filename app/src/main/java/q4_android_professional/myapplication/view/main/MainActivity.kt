@@ -2,7 +2,11 @@ package q4_android_professional.myapplication.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import q4_android_professional.myapplication.R
+import q4_android_professional.myapplication.view.description.DescriptionFragment
+import q4_android_professional.myapplication.view.history.HistoryFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,5 +22,27 @@ class MainActivity : AppCompatActivity() {
                 )
                 .commit()
         }
+    }
+
+    /** Сетим наше меню, при этом открываю ActionBar в темах */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.history_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_history -> {
+                val manager = supportFragmentManager
+                manager.let {
+                    manager.beginTransaction()
+                        .replace(R.id.fragment_container, HistoryFragment.newInstance())
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 }

@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import q4_android_professional.myapplication.R
+import q4_android_professional.myapplication.interactor.LogicInterActor
 import q4_android_professional.myapplication.model.AppState
+import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.networkstatus.AlertDialogFragment
 import q4_android_professional.myapplication.utils.networkstatus.isOnline
 import q4_android_professional.myapplication.viewmodel.BaseViewModel
 
-abstract class BaseFragment<T: AppState>: Fragment() {
+abstract class BaseFragment<T: AppState, I : LogicInterActor<T>>: Fragment() {
 
     abstract val model: BaseViewModel<T>
 
@@ -51,6 +53,8 @@ abstract class BaseFragment<T: AppState>: Fragment() {
     protected fun showAlertDialog(title: String?, message: String?) {
         fragmentManager?.let { AlertDialogFragment.newInstance(title, message).show(it, DIALOG_FRAGMENT_TAG) }
     }
+
+    abstract fun setDataToAdapter(data: List<DataModel>)
 
     companion object {
         private const val DIALOG_FRAGMENT_TAG = "Network_detecting_TAG_999"

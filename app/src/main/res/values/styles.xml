@@ -28,6 +28,14 @@
         <item name="android:textSize">@dimen/text_size_standard_header</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="HeaderDescriptionTextStyle" parent="BaseTextStyle">
+        <item name="android:textColor">@color/color_text_header</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+    </style>
+
     <style name="TextViewButtonStyle" parent="BaseTextStyle">
         <item name="android:textColor">@color/colorAccent</item>
     </style>
