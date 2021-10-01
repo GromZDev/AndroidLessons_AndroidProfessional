@@ -1,9 +1,9 @@
-package q4_android_professional.myapplication.utils.networkstatus
+package myapplication.repository
 
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
 import myapplication.model.data.Meanings
-import q4_android_professional.myapplication.room.HistoryEntity
+import myapplication.repository.room.HistoryEntity
 
 
 fun parseOnlineSearchResults(appState: AppState): AppState {

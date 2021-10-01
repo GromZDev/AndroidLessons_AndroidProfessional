@@ -2,15 +2,15 @@ package q4_android_professional.myapplication.di.koin
 
 import androidx.room.Room
 import myapplication.model.data.DataModel
+import myapplication.repository.RetrofitImplementation
+import myapplication.repository.RoomDataBaseImplementation
+import myapplication.repository.repolocal.RepositoryImplementationLocal
+import myapplication.repository.repolocal.RepositoryLocal
+import myapplication.repository.reporemote.Repository
+import myapplication.repository.reporemote.RepositoryImplementation
+import myapplication.repository.room.HistoryDataBase
 import org.koin.dsl.module
 import q4_android_professional.myapplication.interactor.MainInterActor
-import q4_android_professional.myapplication.model.datasource.roomlocal.RepositoryImplementationLocal
-import q4_android_professional.myapplication.model.datasource.roomlocal.RepositoryLocal
-import q4_android_professional.myapplication.model.datasource.retrofitremote.RetrofitImplementation
-import q4_android_professional.myapplication.model.datasource.roomlocal.RoomDataBaseImplementation
-import q4_android_professional.myapplication.repository.Repository
-import q4_android_professional.myapplication.repository.RepositoryImplementation
-import q4_android_professional.myapplication.room.HistoryDataBase
 import q4_android_professional.myapplication.interactor.HistoryInterActor
 import q4_android_professional.myapplication.viewmodel.HistoryViewModel
 import q4_android_professional.myapplication.viewmodel.MainViewModel

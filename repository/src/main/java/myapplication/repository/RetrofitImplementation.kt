@@ -1,12 +1,14 @@
-package q4_android_professional.myapplication.model.datasource.retrofitremote
+package myapplication.repository
 
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import myapplication.model.data.DataModel
+import myapplication.repository.api.ApiService
+import myapplication.repository.api.BaseInterceptor
+import myapplication.repository.reporemote.DataSource
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import q4_android_professional.myapplication.api.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

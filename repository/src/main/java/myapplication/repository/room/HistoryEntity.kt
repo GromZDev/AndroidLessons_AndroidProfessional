@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.room
+package myapplication.repository.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

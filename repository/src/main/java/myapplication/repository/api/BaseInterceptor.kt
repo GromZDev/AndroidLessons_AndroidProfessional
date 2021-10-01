@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.model.datasource.retrofitremote
+package myapplication.repository.api
 
 import okhttp3.Interceptor
 import okhttp3.Response

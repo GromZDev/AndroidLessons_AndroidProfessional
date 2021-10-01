@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import myapplication.model.data.DataModel
+import myapplication.repository.convertMeaningsToString
 import q4_android_professional.myapplication.databinding.ItemMainFragmentRvBinding
 import q4_android_professional.myapplication.utils.ImageLoader
-import q4_android_professional.myapplication.utils.networkstatus.convertMeaningsToString
 
 class MainAdapter(
     private var onListItemClickListener: OnListItemClickListener,
@@ -58,7 +58,7 @@ class MainAdapter(
                     convertMeaningsToString(
                         it
                     )
-                }
+                }.toString()
 
                 itemView.setOnClickListener { openInNewWindow(data) }
             }

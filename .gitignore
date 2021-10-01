@@ -26,4 +26,5 @@ gradle.xml
 /core/build
 /model/build
 /utils/build
+/repository/build
 

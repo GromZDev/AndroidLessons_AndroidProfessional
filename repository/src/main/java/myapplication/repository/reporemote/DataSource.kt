@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.model.datasource.retrofitremote
+package myapplication.repository.reporemote
 
 
 /** Источник данных для репозитория (Интернет, БД и т. п.) */

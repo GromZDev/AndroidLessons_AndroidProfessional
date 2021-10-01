@@ -1,10 +1,9 @@
-package q4_android_professional.myapplication.model.datasource.roomlocal
+package myapplication.repository
 
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
-import q4_android_professional.myapplication.room.HistoryDao
-import q4_android_professional.myapplication.utils.networkstatus.convertDataModelSuccessToEntity
-import q4_android_professional.myapplication.utils.networkstatus.mapHistoryEntityToSearchResult
+import myapplication.repository.repolocal.DataSourceLocal
+import myapplication.repository.room.HistoryDao
 
 class RoomDataBaseImplementation(private val historyDao: HistoryDao) :
     DataSourceLocal<List<DataModel>> {

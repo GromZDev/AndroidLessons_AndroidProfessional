@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.repository
+package myapplication.repository.reporemote
 
 /** Репозиторий представляет собой слой получения
  * и хранения данных, которые он передаёт интерактору */

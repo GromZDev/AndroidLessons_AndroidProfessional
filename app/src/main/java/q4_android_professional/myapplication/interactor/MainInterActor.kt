@@ -3,8 +3,8 @@ package q4_android_professional.myapplication.interactor
 import myapplication.core.viewmodel.LogicInterActor
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
-import q4_android_professional.myapplication.model.datasource.roomlocal.RepositoryLocal
-import q4_android_professional.myapplication.repository.Repository
+import myapplication.repository.repolocal.RepositoryLocal
+import myapplication.repository.reporemote.Repository
 
 class MainInterActor(
 

@@ -1,7 +1,6 @@
-package q4_android_professional.myapplication.repository
+package myapplication.repository.reporemote
 
 import myapplication.model.data.DataModel
-import q4_android_professional.myapplication.model.datasource.retrofitremote.DataSource
 
 class RepositoryImplementation(private val dataSource: DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {

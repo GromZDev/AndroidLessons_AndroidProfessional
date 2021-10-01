@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.launch
 import myapplication.core.viewmodel.BaseViewModel
 import myapplication.model.data.AppState
+import myapplication.repository.parseLocalSearchResults
 import q4_android_professional.myapplication.interactor.HistoryInterActor
-import q4_android_professional.myapplication.utils.networkstatus.parseLocalSearchResults
 
 class HistoryViewModel(
     private val interActor: HistoryInterActor
