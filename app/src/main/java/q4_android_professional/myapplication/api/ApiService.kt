@@ -2,7 +2,7 @@ package q4_android_professional.myapplication.api
 
 
 import kotlinx.coroutines.Deferred
-import q4_android_professional.myapplication.model.DataModel
+import myapplication.model.data.DataModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

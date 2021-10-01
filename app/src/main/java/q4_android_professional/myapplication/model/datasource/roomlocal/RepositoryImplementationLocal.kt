@@ -1,7 +1,7 @@
 package q4_android_professional.myapplication.model.datasource.roomlocal
 
-import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.model.DataModel
+import myapplication.model.data.AppState
+import myapplication.model.data.DataModel
 
 class RepositoryImplementationLocal(
     private val dataSource: DataSourceLocal<List<DataModel>>

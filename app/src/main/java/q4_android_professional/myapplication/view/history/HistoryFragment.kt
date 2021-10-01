@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import myapplication.core.BaseFragment
+import myapplication.model.data.AppState
+import myapplication.model.data.DataModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentHistoryBinding
 import q4_android_professional.myapplication.interactor.HistoryInterActor
-import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.model.DataModel
-import q4_android_professional.myapplication.view.base.BaseFragment
 import q4_android_professional.myapplication.viewmodel.HistoryViewModel
 
 class HistoryFragment : BaseFragment<AppState, HistoryInterActor>() {
@@ -70,7 +70,7 @@ class HistoryFragment : BaseFragment<AppState, HistoryInterActor>() {
                 if (appState.progress != null) {
                     binding.progressBarHorizontalHistory.visibility = View.VISIBLE
                     binding.progressBarRoundHistory.visibility = View.GONE
-                    binding.progressBarHorizontalHistory.progress = appState.progress
+                    binding.progressBarHorizontalHistory.progress = appState.progress!!
                 } else {
                     binding.progressBarHorizontalHistory.visibility = View.GONE
                     binding.progressBarRoundHistory.visibility = View.VISIBLE

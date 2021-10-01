@@ -6,25 +6,20 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import myapplication.core.BaseFragment
+import myapplication.model.data.AppState
+import myapplication.model.data.DataModel
+import myapplication.utils.networkstatus.isOnline
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentMainBinding
 import q4_android_professional.myapplication.interactor.MainInterActor
-import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.GlideImageLoader
-import q4_android_professional.myapplication.utils.networkstatus.isOnline
-import q4_android_professional.myapplication.view.base.BaseFragment
 import q4_android_professional.myapplication.view.description.DescriptionFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
-import javax.inject.Inject
 
 class MainFragment : BaseFragment<AppState, MainInterActor>() {
-
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override lateinit var model: MainViewModel
 
@@ -124,7 +119,7 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
                 if (appState.progress != null) {
                     binding.progressBarHorizontal.visibility = VISIBLE
                     binding.progressBarRound.visibility = GONE
-                    binding.progressBarHorizontal.progress = appState.progress
+                    binding.progressBarHorizontal.progress = appState.progress!!
                 } else {
                     binding.progressBarHorizontal.visibility = GONE
                     binding.progressBarRound.visibility = VISIBLE

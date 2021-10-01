@@ -6,8 +6,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import myapplication.utils.networkstatus.getEmptyString
 import q4_android_professional.myapplication.databinding.SearchDialogFragmentBinding
-import q4_android_professional.myapplication.utils.networkstatus.getEmptyString
 
 class SearchDialogFragment : BottomSheetDialogFragment() {
 

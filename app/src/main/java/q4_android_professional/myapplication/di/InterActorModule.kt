@@ -1,11 +1,6 @@
 package q4_android_professional.myapplication.di
 
 import dagger.Module
-import dagger.Provides
-import q4_android_professional.myapplication.interactor.MainInterActor
-import q4_android_professional.myapplication.model.DataModel
-import q4_android_professional.myapplication.repository.Repository
-import javax.inject.Named
 
 @Module
 class InterActorModule {

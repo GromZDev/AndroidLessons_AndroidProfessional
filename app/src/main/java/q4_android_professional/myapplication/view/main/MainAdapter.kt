@@ -4,16 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import myapplication.model.data.DataModel
 import q4_android_professional.myapplication.databinding.ItemMainFragmentRvBinding
-import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.ImageLoader
 import q4_android_professional.myapplication.utils.networkstatus.convertMeaningsToString
 
-class MainAdapter @AssistedInject constructor(
-    @Assisted private var onListItemClickListener: OnListItemClickListener,
-    @Assisted private var data: List<DataModel>,
+class MainAdapter(
+    private var onListItemClickListener: OnListItemClickListener,
+    private var data: List<DataModel>,
     val imageLoader: ImageLoader<ShapeableImageView>
 ) :
     RecyclerView.Adapter<MainAdapter.RecyclerItemViewHolder>() {

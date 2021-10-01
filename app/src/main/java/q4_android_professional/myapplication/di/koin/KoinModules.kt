@@ -1,9 +1,9 @@
 package q4_android_professional.myapplication.di.koin
 
 import androidx.room.Room
+import myapplication.model.data.DataModel
 import org.koin.dsl.module
 import q4_android_professional.myapplication.interactor.MainInterActor
-import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.model.datasource.roomlocal.RepositoryImplementationLocal
 import q4_android_professional.myapplication.model.datasource.roomlocal.RepositoryLocal
 import q4_android_professional.myapplication.model.datasource.retrofitremote.RetrofitImplementation

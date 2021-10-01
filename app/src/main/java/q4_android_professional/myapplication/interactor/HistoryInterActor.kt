@@ -1,7 +1,8 @@
 package q4_android_professional.myapplication.interactor
 
-import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.model.DataModel
+import myapplication.core.viewmodel.LogicInterActor
+import myapplication.model.data.AppState
+import myapplication.model.data.DataModel
 import q4_android_professional.myapplication.model.datasource.roomlocal.RepositoryLocal
 import q4_android_professional.myapplication.repository.Repository
 

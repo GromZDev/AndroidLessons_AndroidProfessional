@@ -2,17 +2,15 @@ package q4_android_professional.myapplication.view.description
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import myapplication.model.data.DataModel
+import myapplication.utils.EquilateralImageView
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentDescriptionBinding
-import q4_android_professional.myapplication.model.DataModel
 import q4_android_professional.myapplication.utils.networkstatus.convertMeaningsToString
 import q4_android_professional.myapplication.utils.networkstatus.convertNoteToString
 
@@ -67,7 +65,7 @@ class DescriptionFragment : Fragment() {
         usePicassoToLoadPhoto(binding.descriptionImageview, imageLink)
     }
 
-    private fun usePicassoToLoadPhoto(imageView: ImageView, imageLink: String) {
+    private fun usePicassoToLoadPhoto(imageView: EquilateralImageView, imageLink: String) {
         Picasso.get().load("https:$imageLink")
             .placeholder(R.drawable.ic_no_photo_vector).fit().centerCrop()
             .into(imageView, object : Callback {

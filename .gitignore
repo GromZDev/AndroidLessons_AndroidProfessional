@@ -23,4 +23,7 @@ misc.xml
 gradle.xml
 /.idea/modules/jarRepositories.xml
 /buildSrc/build
+/core/build
+/model/build
+/utils/build
 

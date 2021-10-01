@@ -51,6 +51,11 @@ dependencies {
     // General
     implementation Kotlin.stdlib
     implementation Kotlin.core
+    implementation project(path: ':model')
+    implementation project(path: ':model')
+    implementation project(path: ':utils')
+    implementation project(path: ':utils')
+    implementation project(path: ':core')
     testImplementation TestImpl.junit
     androidTestImplementation TestImpl.ext
     androidTestImplementation TestImpl.espresso

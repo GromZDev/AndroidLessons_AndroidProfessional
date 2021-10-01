@@ -31,7 +31,7 @@
             app:layout_constraintTop_toBottomOf="@+id/description_header"
             tools:text="Description: Lorem ipsum dolor sit amet"/>
 
-        <q4_android_professional.myapplication.utils.EquilateralImageView
+        <myapplication.utils.EquilateralImageView
             android:id="@+id/description_imageview"
             android:layout_width="match_parent"
             android:layout_marginStart="@dimen/margin_medium"

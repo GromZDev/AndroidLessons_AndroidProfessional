@@ -1,8 +1,8 @@
 package q4_android_professional.myapplication.utils.networkstatus
 
-import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.model.DataModel
-import q4_android_professional.myapplication.model.Meanings
+import myapplication.model.data.AppState
+import myapplication.model.data.DataModel
+import myapplication.model.data.Meanings
 import q4_android_professional.myapplication.room.HistoryEntity
 
 
@@ -108,8 +108,8 @@ private fun getSuccessResultData(
 private fun parseOnlineResult(dataModel: DataModel, newDataModels: ArrayList<DataModel>) {
     if (!dataModel.text.isNullOrBlank() && !dataModel.meanings.isNullOrEmpty()) {
         val newMeanings = arrayListOf<Meanings>()
-        for (meaning in dataModel.meanings) {
-            if (meaning.translation != null && !meaning.translation.translation.isNullOrBlank()) {
+        for (meaning in dataModel.meanings!!) {
+            if (meaning.translation != null && !meaning.translation!!.translation.isNullOrBlank()) {
                 newMeanings.add(
                     Meanings(
                         meaning.translation,

@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import myapplication.model.data.DataModel
 import q4_android_professional.myapplication.databinding.ItemHistoryFragmentRvBinding
-import q4_android_professional.myapplication.model.DataModel
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolder>() {
 
