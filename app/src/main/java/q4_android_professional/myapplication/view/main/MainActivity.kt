@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import myapplication.historyscreen.HistoryFragment
 import q4_android_professional.myapplication.R
-import q4_android_professional.myapplication.view.history.HistoryFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

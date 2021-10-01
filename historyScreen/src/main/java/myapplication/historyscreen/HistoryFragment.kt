@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.view.history
+package myapplication.historyscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import myapplication.core.BaseFragment
+import myapplication.historyscreen.databinding.FragmentHistoryBinding
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
+import org.koin.android.compat.ViewModelCompat.viewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import q4_android_professional.myapplication.R
-import q4_android_professional.myapplication.databinding.FragmentHistoryBinding
-import q4_android_professional.myapplication.interactor.HistoryInterActor
-import q4_android_professional.myapplication.viewmodel.HistoryViewModel
 
 class HistoryFragment : BaseFragment<AppState, HistoryInterActor>() {
 

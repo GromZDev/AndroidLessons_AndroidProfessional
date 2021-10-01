@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt' // need for Dagger
-apply plugin: 'kotlin-parcelize' // for Parcelable object
 
 android {
     compileSdkVersion Config.compile_sdk
@@ -48,15 +47,15 @@ android {
 
 dependencies {
 
-    // General
-    implementation Kotlin.stdlib
-    implementation Kotlin.core
     implementation project(path: ':model')
-    implementation project(path: ':model')
-    implementation project(path: ':utils')
     implementation project(path: ':utils')
     implementation project(path: ':core')
     implementation project(path: ':repository')
+    implementation project(path: ':historyScreen')
+
+    // General
+    implementation Kotlin.stdlib
+    implementation Kotlin.core
     testImplementation TestImpl.junit
     androidTestImplementation TestImpl.ext
     androidTestImplementation TestImpl.espresso
@@ -65,47 +64,19 @@ dependencies {
     implementation General.appcompat
     implementation General.material
     implementation General.constraint
-    implementation General.swipe
-
-    // for ReactiveX
-    implementation Rx.rxAndroid
-    implementation Rx.rxJava
-
-    // for Retrofit
-    implementation Retrofit.retrofit
-    implementation Retrofit.converterGson
-    implementation Retrofit.adapterRx3
-    implementation Retrofit.interceptor
-    implementation Retrofit.adapterRx2
-    implementation Retrofit.coroutines
 
     // for Glide
     implementation Glide.glide
     implementation Glide.playServices
     annotationProcessor Glide.compiler
 
-    // for Dagger
-    implementation Dagger.daggerAndroid
-    implementation Dagger.androidSupport
-    kapt Dagger.kaptProcessor
-    kapt Dagger.daggerCompiler
-
     // for Koin
     implementation Koin.koinCore
     implementation Koin.koinAndroid
     implementation Koin.koinAndroidCompat
 
-    // for Coroutines
-    implementation Coroutines.coroutinesCore
-    implementation Coroutines.coroutinesAndroid
-
     // for Picasso
     implementation Picasso.picassoVersion
-
-    // for Room
-    implementation Room.runtime
-    kapt Room.compiler
-    implementation Room.roomKtx
 
     //Test
     implementation fileTree(dir: 'libs', include: ['*.jar'])

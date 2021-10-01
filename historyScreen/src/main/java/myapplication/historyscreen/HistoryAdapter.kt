@@ -1,11 +1,11 @@
-package q4_android_professional.myapplication.view.history
+package myapplication.historyscreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import myapplication.historyscreen.databinding.ItemHistoryFragmentRvBinding
 import myapplication.model.data.DataModel
-import q4_android_professional.myapplication.databinding.ItemHistoryFragmentRvBinding
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolder>() {
 

@@ -1,4 +1,4 @@
-package q4_android_professional.myapplication.interactor
+package myapplication.historyscreen
 
 import myapplication.core.viewmodel.LogicInterActor
 import myapplication.model.data.AppState

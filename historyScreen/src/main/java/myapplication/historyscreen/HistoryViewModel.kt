@@ -1,11 +1,10 @@
-package q4_android_professional.myapplication.viewmodel
+package myapplication.historyscreen
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.launch
 import myapplication.core.viewmodel.BaseViewModel
 import myapplication.model.data.AppState
 import myapplication.repository.parseLocalSearchResults
-import q4_android_professional.myapplication.interactor.HistoryInterActor
 
 class HistoryViewModel(
     private val interActor: HistoryInterActor

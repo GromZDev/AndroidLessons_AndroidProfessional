@@ -1,0 +1,7 @@
+<resources>
+    <string name="error_textview_stub">Error</string>
+    <string name="word_image">Word Image</string>
+    <string name="empty_server_response_on_success">Response from server is
+empty</string>
+    <string name="undefined_error">Undefined error</string>
+</resources>

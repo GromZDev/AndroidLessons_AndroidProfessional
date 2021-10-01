@@ -27,4 +27,5 @@ gradle.xml
 /model/build
 /utils/build
 /repository/build
+/historyScreen/build
 
