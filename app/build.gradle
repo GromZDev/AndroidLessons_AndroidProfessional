@@ -78,6 +78,15 @@ dependencies {
     // for Picasso
     implementation Picasso.picassoVersion
 
+    // for Coroutines
+    implementation Coroutines.coroutinesCore
+    implementation Coroutines.coroutinesAndroid
+
+    // for Room
+    implementation Room.runtime
+    kapt Room.compiler
+    implementation Room.roomKtx
+
     //Test
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
