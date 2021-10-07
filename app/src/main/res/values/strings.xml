@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="_00_00_000">00:00:000</string>
+    <string name="go">GO!</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
 </resources>
