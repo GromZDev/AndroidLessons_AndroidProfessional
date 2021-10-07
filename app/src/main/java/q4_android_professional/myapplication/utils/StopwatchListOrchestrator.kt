@@ -18,6 +18,7 @@ class StopwatchListOrchestrator(
     }
 
     private fun startJob() {
+        job !== null
         scope.launch {
             while (isActive) {
                 mutableTicker.value = stopwatchStateHolder.getStringTimeRepresentation()
