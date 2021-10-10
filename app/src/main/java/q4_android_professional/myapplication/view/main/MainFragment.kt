@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import myapplication.core.BaseFragment
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
-import myapplication.utils.networkstatus.isOnline
 import myapplication.utils.viewById
 import org.koin.android.ext.android.getKoin
 import org.koin.core.scope.Scope
@@ -21,7 +20,6 @@ import q4_android_professional.myapplication.interactor.MainInterActor
 import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.view.description.DescriptionFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
-
 
 class MainFragment : BaseFragment<AppState, MainInterActor>() {
 
@@ -78,15 +76,12 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
 
                 SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    /** Сеть =================================================== */
-                    isNetworkAvailable = context?.let { it1 -> isOnline(it1) } == true
+                    /** Сеть  */
                     if (isNetworkAvailable) {
-                        model.getData(searchWord, true)
-
+                        model.getData(searchWord, isNetworkAvailable)
                     } else {
                         showNoInternetConnectionDialog()
                     }
-                    /** ======================================================== */
                 }
             })
             childFragmentManager.let { it1 ->
