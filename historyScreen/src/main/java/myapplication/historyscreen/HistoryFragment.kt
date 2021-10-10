@@ -10,12 +10,14 @@ import myapplication.core.BaseFragment
 import myapplication.historyscreen.databinding.FragmentHistoryBinding
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
-import org.koin.android.compat.ViewModelCompat.viewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.getKoin
+import org.koin.core.scope.Scope
 
 class HistoryFragment : BaseFragment<AppState, HistoryInterActor>() {
 
     override lateinit var model: HistoryViewModel
+
+    private val scope: Scope = getKoin().createScope<HistoryFragment>()
 
     private val observer = Observer<AppState> {
         renderData(it)
@@ -50,6 +52,12 @@ class HistoryFragment : BaseFragment<AppState, HistoryInterActor>() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /** Также закрываем наш скоуп когда уже не нужен */
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.close()
     }
 
     override fun renderData(appState: AppState) {
@@ -117,7 +125,7 @@ class HistoryFragment : BaseFragment<AppState, HistoryInterActor>() {
         if (binding.historyActivityRecyclerview.adapter != null) {
             throw IllegalStateException("ViewModel должна быть сначала инициирована!")
         }
-        val viewModel: HistoryViewModel by viewModel()
+        val viewModel: HistoryViewModel by scope.inject()
         model = viewModel
         model.subscribe().observe(viewLifecycleOwner, observer)
     }

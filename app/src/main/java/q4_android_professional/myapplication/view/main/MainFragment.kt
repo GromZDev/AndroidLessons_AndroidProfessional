@@ -11,7 +11,8 @@ import myapplication.core.BaseFragment
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
 import myapplication.utils.networkstatus.isOnline
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.getKoin
+import org.koin.core.scope.Scope
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentMainBinding
 import q4_android_professional.myapplication.interactor.MainInterActor
@@ -19,9 +20,11 @@ import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.view.description.DescriptionFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
 
+
 class MainFragment : BaseFragment<AppState, MainInterActor>() {
 
     override lateinit var model: MainViewModel
+    private val scope: Scope = getKoin().createScope<MainFragment>()
 
     private val observer = Observer<AppState> {
         renderData(it)
@@ -97,6 +100,12 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
         _binding = null
     }
 
+    /** Также закрываем наш скоуп когда уже не нужен */
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.close()
+    }
+
     override fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
@@ -170,7 +179,8 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
         if (binding.mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-        val viewModel: MainViewModel by viewModel()
+
+        val viewModel: MainViewModel by scope.inject()
         model = viewModel
         model.subscribe().observe(viewLifecycleOwner, observer)
     }
