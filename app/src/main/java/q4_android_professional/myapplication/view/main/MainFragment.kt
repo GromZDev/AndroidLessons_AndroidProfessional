@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import myapplication.core.BaseFragment
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
 import myapplication.utils.networkstatus.isOnline
+import myapplication.utils.viewById
 import org.koin.android.ext.android.getKoin
 import org.koin.core.scope.Scope
 import q4_android_professional.myapplication.R
@@ -36,13 +38,16 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
             "DIALOG_TAG"
     }
 
+    /** Инициируем два ProgressBar через кастомный делегат */
+    private val progressBarHorizontal by viewById<ProgressBar>(R.id.progress_bar_horizontal)
+    private val progressBarRound by viewById<ProgressBar>(R.id.progress_bar_round)
+
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private var adapter: MainAdapter? = null
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-
 
                 val manager = activity?.supportFragmentManager
                 manager?.let {
@@ -66,8 +71,6 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //   model.getData("Dictionary", true)
 
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
@@ -126,12 +129,12 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
             is AppState.Loading -> {
                 showViewLoading()
                 if (appState.progress != null) {
-                    binding.progressBarHorizontal.visibility = VISIBLE
-                    binding.progressBarRound.visibility = GONE
-                    binding.progressBarHorizontal.progress = appState.progress!!
+                    progressBarHorizontal.visibility = VISIBLE
+                    progressBarRound.visibility = GONE
+                    progressBarHorizontal.progress = appState.progress!!
                 } else {
-                    binding.progressBarHorizontal.visibility = GONE
-                    binding.progressBarRound.visibility = VISIBLE
+                    progressBarHorizontal.visibility = GONE
+                    progressBarRound.visibility = VISIBLE
                 }
             }
             is AppState.Error -> {
