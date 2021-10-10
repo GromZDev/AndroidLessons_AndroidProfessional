@@ -2,12 +2,15 @@ package q4_android_professional.myapplication.view.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import myapplication.core.BaseFragment
 import myapplication.model.data.AppState
 import myapplication.model.data.DataModel
@@ -67,7 +70,7 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
         initViews()
     }.root
 
-    override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.searchFab.setOnClickListener {
@@ -80,7 +83,12 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
                     if (isNetworkAvailable) {
                         model.getData(searchWord, isNetworkAvailable)
                     } else {
-                        showNoInternetConnectionDialog()
+                        /**  showNoInternetConnectionDialog() - если нужно вывести диалог */
+                        binding.mainFragmentRoot.showSnackBarForConnection(
+                            getString(R.string.no_connection), 5000,
+                            { setColorSbBG() },
+                            { setTextSbColor(ContextCompat.getColor(context, R.color.black)) }
+                        )
                     }
                 }
             })
@@ -186,6 +194,22 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
     override fun setDataToAdapter(data: List<DataModel>) {
         adapter?.setData(data)
     }
-    /** ============================================= */
 
+    /** Сетим кастомные Экстеншены для SnackBar: */
+    private fun View.showSnackBarForConnection(
+        text: String, length: Int, bg: Snackbar.() -> Unit, col: Snackbar.() -> Unit
+    ) {
+        val sBar = Snackbar.make(this, text, length)
+        sBar.bg()
+        sBar.col()
+        sBar.show()
+    }
+
+    private fun Snackbar.setColorSbBG() {
+        setBackgroundTint(ContextCompat.getColor(context, R.color.img_stroke_color))
+    }
+
+    private fun Snackbar.setTextSbColor(color: Int) {
+        setTextColor(color)
+    }
 }

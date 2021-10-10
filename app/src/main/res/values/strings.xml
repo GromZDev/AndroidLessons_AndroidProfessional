@@ -11,4 +11,5 @@
     <string name="dialog_title_stub">Не знаю что это. Повторите ещё раз</string>
     <string name="image_stub">image</string>
     <string name="menu_title_history">History</string>
+    <string name="no_connection">Отсутствует интернет-соединение. Повторите попытку позже</string>
 </resources>
