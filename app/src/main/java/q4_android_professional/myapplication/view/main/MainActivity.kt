@@ -1,12 +1,11 @@
 package q4_android_professional.myapplication.view.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import myapplication.historyscreen.HistoryFragment
 import q4_android_professional.myapplication.R
-import q4_android_professional.myapplication.view.description.DescriptionFragment
-import q4_android_professional.myapplication.view.history.HistoryFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.history_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_history -> {

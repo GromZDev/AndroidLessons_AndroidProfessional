@@ -1,0 +1,5 @@
+<resources>
+    <string name="dialog_title_device_is_offline">Нет соединения с интернетом</string>
+    <string name="dialog_message_device_is_offline">Приложение без интернета не работает. Подключите.
+    </string>
+</resources>

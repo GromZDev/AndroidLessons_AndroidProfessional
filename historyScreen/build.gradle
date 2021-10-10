@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+dependencies {
+
+    implementation project(Modules.model)
+    implementation project(Modules.repository)
+    implementation project(Modules.core)
+
+    // for Design
+    implementation General.appcompat
+    implementation General.material
+
+    // General
+    implementation Kotlin.stdlib
+    implementation Kotlin.core
+    testImplementation TestImpl.junit
+    androidTestImplementation TestImpl.ext
+    androidTestImplementation TestImpl.espresso
+
+    // for Coroutines
+    implementation Coroutines.coroutinesCore
+    implementation Coroutines.coroutinesAndroid
+
+    // for Koin
+    implementation Koin.koinCore
+    implementation Koin.koinAndroid
+    implementation Koin.koinAndroidCompat
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+}

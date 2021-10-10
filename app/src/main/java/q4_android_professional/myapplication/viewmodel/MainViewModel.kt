@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import myapplication.core.viewmodel.BaseViewModel
+import myapplication.model.data.AppState
+import myapplication.repository.parseOnlineSearchResults
 import q4_android_professional.myapplication.interactor.MainInterActor
-import q4_android_professional.myapplication.model.AppState
-import q4_android_professional.myapplication.utils.networkstatus.parseOnlineSearchResults
 
 class MainViewModel(
     private val interActor: MainInterActor
