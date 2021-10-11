@@ -4,7 +4,7 @@ import androidx.room.Room
 import myapplication.historyscreen.HistoryFragment
 import myapplication.historyscreen.HistoryInterActor
 import myapplication.historyscreen.HistoryViewModel
-import myapplication.model.data.DataModel
+import myapplication.model.data.dto.SearchResultDTO
 import myapplication.repository.RetrofitImplementation
 import myapplication.repository.RoomDataBaseImplementation
 import myapplication.repository.repolocal.RepositoryImplementationLocal
@@ -16,7 +16,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import q4_android_professional.myapplication.interactor.MainInterActor
-import q4_android_professional.myapplication.view.main.MainFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
 
 /** application - тут хранятся зависимости, используемые во всем приложении */
@@ -24,17 +23,17 @@ val application = module {
 
     single { Room.databaseBuilder(get(), HistoryDataBase::class.java, "HistoryDB").build() }
     single { get<HistoryDataBase>().historyDao() }
-    single<Repository<List<DataModel>>> {
+    single<Repository<List<SearchResultDTO>>> {
         RepositoryImplementation(RetrofitImplementation())
     }
-    single<RepositoryLocal<List<DataModel>>> {
+    single<RepositoryLocal<List<SearchResultDTO>>> {
         RepositoryImplementationLocal(RoomDataBaseImplementation(get()))
     }
 }
 
 /** Объявляем скоуп для главного фрагмента. Также и viewModel */
 val mainScreen = module {
-    scope(named<MainFragment>()) {
+    scope(named("fragment_scope")) {
         scoped { MainInterActor(get(), get()) }
         viewModel { MainViewModel(get()) }
     }

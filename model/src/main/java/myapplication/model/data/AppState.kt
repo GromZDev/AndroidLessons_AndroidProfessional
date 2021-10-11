@@ -1,5 +1,7 @@
 package myapplication.model.data
 
+import myapplication.model.data.data.DataModel
+
 /** Это наши состояния приложения. Их у нас 3 шт*/
 sealed class AppState {
 

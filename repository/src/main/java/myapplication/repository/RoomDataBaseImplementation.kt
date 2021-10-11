@@ -1,14 +1,14 @@
 package myapplication.repository
 
 import myapplication.model.data.AppState
-import myapplication.model.data.DataModel
+import myapplication.model.data.dto.SearchResultDTO
 import myapplication.repository.repolocal.DataSourceLocal
 import myapplication.repository.room.HistoryDao
 
 class RoomDataBaseImplementation(private val historyDao: HistoryDao) :
-    DataSourceLocal<List<DataModel>> {
+    DataSourceLocal<List<SearchResultDTO>> {
     /** Coroutines -  */
-       override suspend fun getData(word: String): List<DataModel> =
+       override suspend fun getData(word: String): List<SearchResultDTO> =
            mapHistoryEntityToSearchResult(historyDao.all())
 
     /** Сохраняем слово в БД для интерактора */

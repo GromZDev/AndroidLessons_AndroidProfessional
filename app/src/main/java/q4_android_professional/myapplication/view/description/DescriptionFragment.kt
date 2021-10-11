@@ -7,7 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import myapplication.model.data.DataModel
+import myapplication.model.data.data.DataModel
 import myapplication.repository.convertMeaningsToString
 import myapplication.repository.convertNoteToString
 import myapplication.utils.EquilateralImageView
@@ -46,7 +46,7 @@ class DescriptionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         startLoadingOrShowError()
-      //  setData()
+        //  setData()
     }
 
     override fun onDestroyView() {
@@ -57,14 +57,10 @@ class DescriptionFragment : Fragment() {
     private fun setData() {
 
         binding.descriptionHeader.text = data.text
-        binding.descriptionTextview.text = data.meanings?.let {
-            convertMeaningsToString(it)
-        }.toString()
-        binding.transcriptionTextview.text = data.meanings?.get(0)?.transcription
-        binding.noteTextview.text = data.meanings?.let {
-            convertNoteToString(it)
-        }.toString()
-        val imageLink = data.meanings?.get(0)?.imageUrl.toString()
+        binding.descriptionTextview.text = convertMeaningsToString(data.meanings)
+        binding.transcriptionTextview.text = data.meanings[0].transcriptionNew
+        binding.noteTextview.text = convertNoteToString(data.meanings)
+        val imageLink = data.meanings[0].imageUrlNew
 
         usePicassoToLoadPhoto(binding.descriptionImageview, imageLink)
     }

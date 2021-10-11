@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import myapplication.core.viewmodel.BaseViewModel
 import myapplication.core.viewmodel.LogicInterActor
 import myapplication.model.data.AppState
-import myapplication.model.data.DataModel
+import myapplication.model.data.data.DataModel
 import myapplication.utils.networkstatus.AlertDialogFragment
 import myapplication.utils.networkstatus.OnlineLiveData
 
@@ -49,7 +49,7 @@ abstract class BaseFragment<T : AppState, I : LogicInterActor<T>> : Fragment() {
         }
     }
 
-    protected fun showNoInternetConnectionDialog() {
+    private fun showNoInternetConnectionDialog() {
         showAlertDialog(
             getString(R.string.dialog_title_device_is_offline),
             getString(R.string.dialog_message_device_is_offline)

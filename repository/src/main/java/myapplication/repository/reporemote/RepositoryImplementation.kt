@@ -1,12 +1,12 @@
 package myapplication.repository.reporemote
 
-import myapplication.model.data.DataModel
+import myapplication.model.data.dto.SearchResultDTO
 
-class RepositoryImplementation(private val dataSource: DataSource<List<DataModel>>) :
-    Repository<List<DataModel>> {
+class RepositoryImplementation(private val dataSource: DataSource<List<SearchResultDTO>>) :
+    Repository<List<SearchResultDTO>> {
 
     /** Coroutines -  */
-    override suspend fun getData(word: String): List<DataModel> {
+    override suspend fun getData(word: String): List<SearchResultDTO> {
         return dataSource.getData(word)
     }
 }

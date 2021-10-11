@@ -13,9 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import myapplication.core.BaseFragment
 import myapplication.model.data.AppState
-import myapplication.model.data.DataModel
+import myapplication.model.data.data.DataModel
 import myapplication.utils.viewById
 import org.koin.android.ext.android.getKoin
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentMainBinding
@@ -24,10 +27,11 @@ import q4_android_professional.myapplication.utils.GlideImageLoader
 import q4_android_professional.myapplication.view.description.DescriptionFragment
 import q4_android_professional.myapplication.viewmodel.MainViewModel
 
-class MainFragment : BaseFragment<AppState, MainInterActor>() {
+class MainFragment : BaseFragment<AppState, MainInterActor>(), AndroidScopeComponent {
 
     override lateinit var model: MainViewModel
-    private val scope: Scope = getKoin().createScope<MainFragment>()
+    override val scope: Scope =
+        getKoin().getOrCreateScope("fragment_scope_id", named("fragment_scope"))
 
     private val observer = Observer<AppState> {
         renderData(it)
@@ -185,8 +189,9 @@ class MainFragment : BaseFragment<AppState, MainInterActor>() {
         if (binding.mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-
-        val viewModel: MainViewModel by scope.inject()
+        /** Делаем через sharedViewModel для того, чтобы при возвращении на фрагмент
+         *  данные не исчезали!*/
+        val viewModel: MainViewModel by sharedViewModel()
         model = viewModel
         model.subscribe().observe(viewLifecycleOwner, observer)
     }

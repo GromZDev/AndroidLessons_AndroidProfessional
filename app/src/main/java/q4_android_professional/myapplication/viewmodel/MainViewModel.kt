@@ -7,11 +7,16 @@ import kotlinx.coroutines.withContext
 import myapplication.core.viewmodel.BaseViewModel
 import myapplication.model.data.AppState
 import myapplication.repository.parseOnlineSearchResults
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.createScope
+import org.koin.core.scope.Scope
 import q4_android_professional.myapplication.interactor.MainInterActor
 
 class MainViewModel(
     private val interActor: MainInterActor
-) : BaseViewModel<AppState>() {
+) : BaseViewModel<AppState>(), KoinScopeComponent {
+
+    override val scope: Scope by lazy { createScope(this) }
 
     private val livedataToObserve: LiveData<AppState> = _mutableLiveData
 

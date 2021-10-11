@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import myapplication.core.BaseFragment
 import myapplication.historyscreen.databinding.FragmentHistoryBinding
 import myapplication.model.data.AppState
-import myapplication.model.data.DataModel
+import myapplication.model.data.data.DataModel
 import org.koin.android.ext.android.getKoin
 import org.koin.core.scope.Scope
 
