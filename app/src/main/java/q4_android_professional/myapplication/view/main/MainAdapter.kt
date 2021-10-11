@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
-import myapplication.model.data.DataModel
+import myapplication.model.data.data.DataModel
 import myapplication.repository.convertMeaningsToString
 import q4_android_professional.myapplication.databinding.ItemMainFragmentRvBinding
 import q4_android_professional.myapplication.utils.ImageLoader
@@ -48,17 +48,15 @@ class MainAdapter(
                 headerTextviewRecyclerItem.text = data.text
 
                 descriptionTextviewRecyclerItem.text =
-                    data.meanings?.get(0)?.translation?.translation
+                    data.meanings[0].translatedMeaning.translatedMeaning
 
                 imageLoader.loadInto(
-                    "https:" + data.meanings?.get(0)?.previewUrl.toString(), itemWordImage
+                    "https:" + data.meanings[0].previewUrlNew, itemWordImage
                 )
 
-                transcriptionTextviewRecyclerItem.text = data.meanings?.let {
-                    convertMeaningsToString(
-                        it
-                    )
-                }.toString()
+                transcriptionTextviewRecyclerItem.text = convertMeaningsToString(
+                    data.meanings
+                )
 
                 itemView.setOnClickListener { openInNewWindow(data) }
             }

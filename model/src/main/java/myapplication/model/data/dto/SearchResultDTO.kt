@@ -1,11 +1,11 @@
-package myapplication.model.data
+package myapplication.model.data.dto
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class DataModel(
+class SearchResultDTO(
     @field:SerializedName("text") val text: String?,
-    @field:SerializedName("meanings") val meanings: List<Meanings>?
+    @field:SerializedName("meanings") val meanings: List<MeaningsDTO>?
 ) : Parcelable

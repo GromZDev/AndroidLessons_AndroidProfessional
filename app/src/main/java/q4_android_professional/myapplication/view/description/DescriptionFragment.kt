@@ -7,16 +7,19 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import myapplication.model.data.DataModel
+import myapplication.model.data.data.DataModel
 import myapplication.repository.convertMeaningsToString
 import myapplication.repository.convertNoteToString
 import myapplication.utils.EquilateralImageView
+import myapplication.utils.networkstatus.AlertDialogFragment
+import myapplication.utils.networkstatus.OnlineLiveData
 import q4_android_professional.myapplication.R
 import q4_android_professional.myapplication.databinding.FragmentDescriptionBinding
 
 class DescriptionFragment : Fragment() {
 
     companion object {
+        private const val DIALOG_FRAGMENT_TAG = "DESCRIPTION_DIALOG_TAG"
         private const val BUNDLE_EXTRA = "MY_Word_Description"
         fun newInstance(data: DataModel) = DescriptionFragment().apply {
             arguments = bundleOf(BUNDLE_EXTRA to data)
@@ -42,7 +45,8 @@ class DescriptionFragment : Fragment() {
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setData()
+        startLoadingOrShowError()
+        //  setData()
     }
 
     override fun onDestroyView() {
@@ -53,14 +57,10 @@ class DescriptionFragment : Fragment() {
     private fun setData() {
 
         binding.descriptionHeader.text = data.text
-        binding.descriptionTextview.text = data.meanings?.let {
-            convertMeaningsToString(it)
-        }.toString()
-        binding.transcriptionTextview.text = data.meanings?.get(0)?.transcription
-        binding.noteTextview.text = data.meanings?.let {
-            convertNoteToString(it)
-        }.toString()
-        val imageLink = data.meanings?.get(0)?.imageUrl.toString()
+        binding.descriptionTextview.text = convertMeaningsToString(data.meanings)
+        binding.transcriptionTextview.text = data.meanings[0].transcriptionNew
+        binding.noteTextview.text = convertNoteToString(data.meanings)
+        val imageLink = data.meanings[0].imageUrlNew
 
         usePicassoToLoadPhoto(binding.descriptionImageview, imageLink)
     }
@@ -78,6 +78,28 @@ class DescriptionFragment : Fragment() {
             })
     }
 
+    private fun startLoadingOrShowError() {
+        val manager = activity?.supportFragmentManager
+        context?.let { net ->
+            OnlineLiveData(net).observe(
+                viewLifecycleOwner,
+                {
+                    if (it) {
+                        setData()
+                    } else {
+                        if (manager != null) {
+                            AlertDialogFragment.newInstance(
+                                getString(R.string.dialog_title_device_is_offline),
+                                getString(R.string.dialog_message_device_is_offline)
+                            ).show(
+                                manager,
+                                DIALOG_FRAGMENT_TAG
+                            )
+                        }
+                    }
+                })
+        }
+    }
 }
 
 
