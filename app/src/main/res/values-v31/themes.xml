@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="Theme.MyApplicationSplashScreen" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.MyApplication</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_baseline_menu_book_24</item>
+        <item name="windowSplashScreenBackground">@color/splashscreen_bg_start</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/sc_branding</item>
+    </style>
+</resources>
