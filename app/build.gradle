@@ -87,6 +87,9 @@ dependencies {
     kapt Room.compiler
     implementation Room.roomKtx
 
+    // for SplashScreen Android12
+    implementation SplashScreen.splashScreen
+
     //Test
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

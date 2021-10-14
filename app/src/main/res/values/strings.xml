@@ -12,4 +12,5 @@
     <string name="image_stub">image</string>
     <string name="menu_title_history">History</string>
     <string name="no_connection">Отсутствует интернет-соединение. Повторите попытку позже</string>
+    <string name="wow">WOW</string>
 </resources>

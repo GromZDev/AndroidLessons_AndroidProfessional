@@ -1,5 +1,8 @@
 package q4_android_professional.myapplication.view.main
 
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -93,6 +96,11 @@ class MainFragment : BaseFragment<AppState, MainInterActor>(), AndroidScopeCompo
                             { setColorSbBG() },
                             { setTextSbColor(ContextCompat.getColor(context, R.color.black)) }
                         )
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                            val blurEffect =
+                                RenderEffect.createBlurEffect(36f, 16f, Shader.TileMode.MIRROR)
+                            binding.root.setRenderEffect(blurEffect)
+                        }
                     }
                 }
             })

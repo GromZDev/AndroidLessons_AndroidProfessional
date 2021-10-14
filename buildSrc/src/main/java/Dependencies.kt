@@ -3,9 +3,9 @@ import org.gradle.api.JavaVersion
 object Config {
     const val application_id = "q4_android_professional.myapplication"
     const val build_tools = "30.0.3"
-    const val compile_sdk = 30
+    const val compile_sdk = 31
     const val min_sdk_ver = 25
-    const val target_sdk = 30
+    const val target_sdk = 31
     val java_version = JavaVersion.VERSION_1_8
     const val test_runner = "androidx.test.runner.AndroidJUnitRunner"
 }
@@ -78,6 +78,9 @@ object Versions {
     const val runtime = "2.3.0"
     const val room_compiler = "2.3.0"
 
+    // for Splashscreen
+    const val splash_screen = "1.0.0-alpha02"
+
     // for Test
     const val jUnit = "4.13.2"
     const val ext = "1.1.3"
@@ -143,6 +146,10 @@ object Room {
     const val runtime = "androidx.room:room-runtime:${Versions.runtime}"
     const val compiler = "androidx.room:room-compiler:${Versions.room_compiler}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room_ktx}"
+}
+
+object SplashScreen {
+    const val splashScreen = "androidx.core:core-splashscreen:${Versions.splash_screen}"
 }
 
 object TestImpl {
